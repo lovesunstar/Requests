@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Requests'
-  s.version          = '0.1.0'
+  s.version          = '5.0'
   s.summary          = 'A short description of Requests.'
 
 # This description is used to generate tags and improve search results.
@@ -18,25 +18,18 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Request HTTP Like Python's Request Framework
                        DESC
-
   s.homepage         = 'https://github.com/lovesunstar/Requests'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'lovesunstar' => 'sunjiangting@maetimes.com' }
   s.source           = { :git => 'https://github.com/lovesunstar/Requests.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+   s.social_media_url = 'https://twitter.com/lovesunstar'
+   
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'Requests/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'Requests' => ['Requests/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.frameworks = 'Foundation'
+  s.dependency 'Alamofire'
 end

@@ -1,0 +1,23 @@
+PODS:
+  - Alamofire (5.4.3)
+  - Requests (5.0):
+    - Alamofire
+
+DEPENDENCIES:
+  - Requests (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+
+EXTERNAL SOURCES:
+  Requests:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  Requests: e9d7aeffee38d71ee46d422e6b712979c9110c67
+
+PODFILE CHECKSUM: 5fd83faee3ff43a08a3b90eb9de5d3daac15e168
+
+COCOAPODS: 1.10.1

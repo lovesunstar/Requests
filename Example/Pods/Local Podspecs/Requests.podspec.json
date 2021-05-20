@@ -1,0 +1,29 @@
+{
+  "name": "Requests",
+  "version": "5.0",
+  "summary": "A short description of Requests.",
+  "description": "Request HTTP Like Python's Request Framework",
+  "homepage": "https://github.com/lovesunstar/Requests",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "lovesunstar": "sunjiangting@maetimes.com"
+  },
+  "source": {
+    "git": "https://github.com/lovesunstar/Requests.git",
+    "tag": "5.0"
+  },
+  "social_media_url": "https://twitter.com/lovesunstar",
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "Requests/Classes/**/*",
+  "frameworks": "Foundation",
+  "dependencies": {
+    "Alamofire": [
+
+    ]
+  }
+}
