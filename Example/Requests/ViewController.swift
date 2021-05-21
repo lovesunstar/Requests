@@ -67,7 +67,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        Requests.printVerbose = true
         print("Begin synchronized request1")
         print(Requests.Session(configuration: URLSessionConfiguration.default).request("https://httpbin.org/post").query(["key1": "value1"]).post(["foo": "bar"]).syncResponseJSON())
         print("Begin synchronized request2")

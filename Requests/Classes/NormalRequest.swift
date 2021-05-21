@@ -13,7 +13,7 @@ class NormalRequest: Requests.Request {
     internal let request: Alamofire.Request
     internal let builder: NormalBuilder
     
-    internal override var httpBuilder: HTTPBuilder {
+    override var httpBuilder: HTTPBuilder {
         return builder
     }
     

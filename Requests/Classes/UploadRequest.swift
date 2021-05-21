@@ -16,7 +16,7 @@ class UploadRequest: Requests.Request {
     
     private var isCancelled = false
     
-    internal override var httpBuilder: HTTPBuilder {
+    override var httpBuilder: HTTPBuilder {
         return builder
     }
     

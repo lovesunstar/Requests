@@ -26,9 +26,9 @@ Network.request(url)
 .pack() unwrap?.pon_response { _, _, results, error in logic }
 */
 public class NormalBuilder: HTTPBuilder {
-
+    
     /// NOTE: never use this way on main thread
-    open func syncResponseJSON(options: JSONSerialization.ReadingOptions = .allowFragments) -> (URLResponse?, Any?, NSError?) {
+    public func syncResponseJSON(options: JSONSerialization.ReadingOptions = .allowFragments) -> (URLResponse?, Any?, NSError?) {
         if let request = build() {
             var response: URLResponse?
             var responseData: Any?
@@ -46,7 +46,7 @@ public class NormalBuilder: HTTPBuilder {
         return (nil, nil, nil)
     }
 
-    open override func build() -> Request? {
+    public override func build() -> Request? {
         if self.urlString.isEmpty {
             return nil
         }

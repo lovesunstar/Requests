@@ -24,9 +24,21 @@ public class Request {
         }
     }
     
-    internal var httpBuilder: HTTPBuilder {
+    public var httpBuilder: HTTPBuilder {
         fatalError("Sub class must implemention")
     }
+    
+    public var session: Requests.Session? {
+        return httpBuilder.session
+    }
+    
+    #if DEBUG
+    deinit {
+        if printVerbose {
+            print("Request Dealloc \(httpBuilder.urlString)")
+        }
+    }
+    #endif
     
     internal init() {
         

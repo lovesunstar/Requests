@@ -14,6 +14,7 @@ typealias AFSession = Alamofire.Session
 typealias AFMethod = Alamofire.HTTPMethod
 typealias AFRequest = Alamofire.Request
 
+public var printVerbose = false
 
 public func request(_ url: String) -> NormalBuilder {
     let builder = Requests.Session.shared.request(url)
@@ -101,6 +102,14 @@ public class Session {
     }
     
     internal var afSession: AFSession
+    
+    #if DEBUG
+    deinit {
+        if printVerbose {
+            print("Session Dealloc")
+        }
+    }
+    #endif
     
     public init(configuration: URLSessionConfiguration) {
         afSession = AFSession(configuration: configuration, serverTrustManager: Session.trustManager)

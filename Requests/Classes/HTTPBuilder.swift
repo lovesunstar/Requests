@@ -10,9 +10,18 @@ import Alamofire
 
 public class HTTPBuilder: NSObject {
     
-    internal weak var session: Requests.Session?
+    /// 外部可以从 Builder 访问到 Session，然后重置 Session， 弱引用
+    public internal(set) weak var session: Requests.Session?
     
     internal var querySorter: ((String, String)->Bool)?
+    
+    #if DEBUG
+    deinit {
+        if printVerbose {
+            print("HTTPBuilder Dealloc \(urlString)")
+        }
+    }
+    #endif
     
     required init(url: String, session: Requests.Session) {
         urlString = url
@@ -25,31 +34,31 @@ public class HTTPBuilder: NSObject {
     }
     
     @discardableResult
-    open func method(_ method: Alamofire.HTTPMethod) -> Self {
+    public func method(_ method: Alamofire.HTTPMethod) -> Self {
         httpMethod = method
         return self
     }
     
     @discardableResult
-    open func mark(_ mark: [String: Any]?) -> Self {
+    public func mark(_ mark: [String: Any]?) -> Self {
         requestExtra = mark
         return self
     }
     
     @discardableResult
-    open func appendCommonParameters(_ append: Bool) -> Self {
+    public func appendCommonParameters(_ append: Bool) -> Self {
         vappendCommonParameters = append
         return self
     }
     
     @discardableResult
-    open func query(_ parameters: [String : Any]?) -> Self {
+    public func query(_ parameters: [String : Any]?) -> Self {
         queryParameters = parameters
         return self
     }
     
     @discardableResult
-    open func post(_ parameters: [String : Any]?) -> Self {
+    public func post(_ parameters: [String : Any]?) -> Self {
         postParameters = parameters
         if let p = parameters , !p.isEmpty {
             let _ = method(.post)
@@ -58,55 +67,55 @@ public class HTTPBuilder: NSObject {
     }
     
     @discardableResult
-    open func content(_ parameters: [String : Any]?) -> Self {
+    public func content(_ parameters: [String : Any]?) -> Self {
         postParameters = parameters
         return self
     }
     
     @discardableResult
-    open func headers(_ headers: [String : String]?) -> Self {
+    public func headers(_ headers: [String : String]?) -> Self {
         vheaders = headers
         return self
     }
     
     @discardableResult
-    open func gzipEnabled(_ enabled: Bool) -> Self {
+    public func gzipEnabled(_ enabled: Bool) -> Self {
         vgzipEnabled = enabled
         return self
     }
     
     @discardableResult
-    open func retry(_ retryTimes: UInt16) -> Self {
+    public func retry(_ retryTimes: UInt16) -> Self {
         self.retryTimes = retryTimes
         return self
     }
     
     @discardableResult
-    open func timeout(_ timeout: TimeInterval) -> Self {
+    public func timeout(_ timeout: TimeInterval) -> Self {
         timeoutInterval = timeout
         return self
     }
     
     @discardableResult
-    open func cachePolicy(_ policy: NSURLRequest.CachePolicy) -> Self {
+    public func cachePolicy(_ policy: NSURLRequest.CachePolicy) -> Self {
         vcachePolicy = policy
         return self
     }
     
     @discardableResult
-    open func priority(_ priority: Session.Priority) -> Self {
+    public func priority(_ priority: Session.Priority) -> Self {
         vpriority = priority
         return self
     }
     
     @discardableResult
-    open func encoding(_ encoding: ParameterEncoding) -> Self {
+    public func encoding(_ encoding: ParameterEncoding) -> Self {
         parameterEncoding = encoding
         return self
     }
     
     @discardableResult
-    open func downloadProgress(on queue: DispatchQueue = DispatchQueue.main, callback:((Progress)->Void)?) -> Self {
+    public func downloadProgress(on queue: DispatchQueue = DispatchQueue.main, callback:((Progress)->Void)?) -> Self {
         downloadProgressQueue = queue
         downloadProgressCallback = callback
         return self
@@ -137,29 +146,29 @@ public class HTTPBuilder: NSObject {
         return results
     }
     
-    open func build() -> Request? {
+    public func build() -> Request? {
         return nil
     }
     
-    internal var urlString: String
-    internal var vheaders: [String : String]?
-    internal var queryParameters: [String : Any]?
-    internal var parameterEncoding: ParameterEncoding = .url
-    internal var vappendCommonParameters = true
-    internal var retryTimes: UInt16 = 0
-    internal var timeoutInterval: TimeInterval = Session.client?.timeoutInterval ?? 15
-    internal var vcachePolicy = NSURLRequest.CachePolicy.useProtocolCachePolicy
-    internal var vpriority = Session.Priority.default
+    var urlString: String
+    var vheaders: [String : String]?
+    var queryParameters: [String : Any]?
+    var parameterEncoding: ParameterEncoding = .url
+    var vappendCommonParameters = true
+    var retryTimes: UInt16 = 0
+    var timeoutInterval: TimeInterval = Session.client?.timeoutInterval ?? 15
+    var vcachePolicy = NSURLRequest.CachePolicy.useProtocolCachePolicy
+    var vpriority = Session.Priority.default
     
-    internal var downloadProgressQueue: DispatchQueue?
-    internal var downloadProgressCallback: ((Progress)->Void)?
+    var downloadProgressQueue: DispatchQueue?
+    var downloadProgressCallback: ((Progress)->Void)?
     
-    internal var vgzipEnabled = Session.client?.isGZipEnabled ?? false
+    var vgzipEnabled = Session.client?.isGZipEnabled ?? false
     /// 发送请求的时间（unix时间戳）
-    internal var requestTimestamp: TimeInterval = 0
+    var requestTimestamp: TimeInterval = 0
     
-    internal var httpMethod: AFMethod = .get
-    internal var postParameters: [String : Any]?
+    var httpMethod: AFMethod = .get
+    var postParameters: [String : Any]?
     
-    internal var requestExtra: [String : Any]?
+    var requestExtra: [String : Any]?
 }

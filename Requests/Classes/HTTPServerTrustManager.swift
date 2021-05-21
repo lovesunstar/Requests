@@ -10,6 +10,14 @@ import Alamofire
 
 class HTTPServerTrustManager: ServerTrustManager {
     
+    #if DEBUG
+    deinit {
+        if printVerbose {
+            print("HTTPServerTrustManager Dealloc")
+        }
+    }
+    #endif
+    
     init() {
         super.init(allHostsMustBeEvaluated: true, evaluators: [:])
     }
