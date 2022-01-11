@@ -67,40 +67,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Requests.printVerbose = true
-        print("Begin synchronized request1")
-        print(Requests.Session(configuration: URLSessionConfiguration.default).request("https://httpbin.org/post").query(["key1": "value1"]).post(["foo": "bar"]).syncResponseJSON())
-        print("Begin synchronized request2")
-        print(Requests.request("https://httpbin.org/post").query(["key2": "value2"]).post(["encode": "json"]).encoding(.json).syncResponseJSON())
-        
-        let request = Requests.request("https://httpbin.org/get").query(["foo": "bar"]).build()
+        let request = Requests.request("https://api.pokekara123123.com/get").query(["foo": "bar"]).retry(2).build()
         
         request?.responseJSON(completionHandler: { (_, urlResponse, jsonData, error) -> Void in
             print("Request3", urlResponse ?? "", jsonData ?? "", error ?? "")
         })
-        
-        request?.cancel()
-        
-        Requests.request("https://httpbin.org/post").query(["foo": "bar"]).post(["foo_p": "bar_p"]).build()?.responseJSON(completionHandler: { (_, urlResponse, jsonData, error) -> Void in
-            print("Request4", urlResponse ?? "", jsonData ?? "", error ?? "")
-        })
-        
-        Requests.request("https://httpbin.org/post").query(["foo": "bar"]).post(["foo_p": "bar_p"]).encoding(.json).build()?.responseJSON(completionHandler: { (_, urlResponse, jsonData, error) -> Void in
-            print("Request5", urlResponse ?? "", jsonData ?? "", error ?? "")
-        })
-        let data: Data = {
-            let longText: NSMutableString = ""
-            for _ in 0..<10000 {
-                longText.append("This is a long text.")
-            }
-            return (longText as String).data(using: .utf8)!
-        }()
-        Requests.upload("https://httpbin.org/post").append(data: data, name: "test.txt", fileName: "test.txt", mimeType: "text/plain")
-            .uploadProgress { (progress) in
-            print("=====", progress)
-            }.build()?.responseJSON(completionHandler: { (_, _, results, _) in
-                print("=====",results ?? "FFF")
-            })
     }
     
     override func didReceiveMemoryWarning() {

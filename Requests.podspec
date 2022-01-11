@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Requests'
-  s.version          = '5.0'
+  s.version          = '5.1'
   s.summary          = 'A short description of Requests.'
 
 # This description is used to generate tags and improve search results.
@@ -31,5 +31,5 @@ Request HTTP Like Python's Request Framework
 
   s.source_files = 'Requests/Classes/**/*'
   s.frameworks = 'Foundation'
-  s.dependency 'Alamofire'
+  s.dependency 'Alamofire', '5.4.4'
 end
